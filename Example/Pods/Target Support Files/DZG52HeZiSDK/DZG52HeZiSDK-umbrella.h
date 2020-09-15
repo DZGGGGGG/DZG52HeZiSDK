@@ -185,6 +185,7 @@
 #import "logging-impl.h"
 #import "javascript-task-runner.h"
 #import "javascript-task.h"
+#import "deBugSendMessage.h"
 
 FOUNDATION_EXPORT double DZG52HeZiSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char DZG52HeZiSDKVersionString[];

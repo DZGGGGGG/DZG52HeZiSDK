@@ -20,7 +20,8 @@
   },
   "source_files": [
     "DZG52HeZiSDK/Classes/HippySDK/ios/**/*.{h,m,c,mm,s,cpp,cc}",
-    "DZG52HeZiSDK/Classes/HippySDK/core/**/*.{h,cc,mm}"
+    "DZG52HeZiSDK/Classes/HippySDK/core/**/*.{h,cc,mm}",
+    "DZG52HeZiSDK/Classes/HippySDK/sendwebsocket/**/*.{h,m}"
   ],
   "libraries": "c++",
   "pod_target_xcconfig": {

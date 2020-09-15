@@ -33,7 +33,7 @@
 #include "js-native-api.h"
 
 
-#import "webSocketModule.h"
+#import "deBugSendMessage.h"
 
 REGISTER_MODULE(ConsoleModule, Log)
 
@@ -75,7 +75,7 @@ void ConsoleModule::Log(const napi::CallbackInfo& info) {
     #ifdef DEBUG
           NSString *message = [[NSString alloc] initWithUTF8String:log_msg];
           //[[webSocketModule instance] SendDataHTTPS:message];
-      [[webSocketModule instance] webSocketSendData:message];
+      [[deBugSendMessage instance] webSocketSendData:message];
     #endif
       
     HIPPY_LOG(hippy::Debug, log_msg);

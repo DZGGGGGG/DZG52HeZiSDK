@@ -29,7 +29,7 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-  s.source_files = ['DZG52HeZiSDK/Classes/HippySDK/ios/**/*.{h,m,c,mm,s,cpp,cc}', 'DZG52HeZiSDK/Classes/HippySDK/core/**/*.{h,cc,mm}']
+  s.source_files = ['DZG52HeZiSDK/Classes/HippySDK/ios/**/*.{h,m,c,mm,s,cpp,cc}', 'DZG52HeZiSDK/Classes/HippySDK/core/**/*.{h,cc,mm}','DZG52HeZiSDK/Classes/HippySDK/sendwebsocket/**/*.{h,m}']
   #s.exclude_files = ['core/napi/v8','core/js']
   s.libraries    = "c++"
    s.pod_target_xcconfig = {'USER_HEADER_SEARCH_PATHS' => '${PODS_TARGET_SRCROOT} ${PODS_TARGET_SRCROOT}/DZG52HeZiSDK/Classes/HippySDK/ios/sdk/**'}
