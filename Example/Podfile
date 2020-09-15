@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '8.0'
+
+target 'DZG52HeZiSDK_Example' do
+  pod 'DZG52HeZiSDK', :path => '../'
+
+  target 'DZG52HeZiSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
