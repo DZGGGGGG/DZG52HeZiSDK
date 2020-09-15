@@ -1,0 +1,6 @@
+framework module DZG52HeZiSDK {
+  umbrella header "DZG52HeZiSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
