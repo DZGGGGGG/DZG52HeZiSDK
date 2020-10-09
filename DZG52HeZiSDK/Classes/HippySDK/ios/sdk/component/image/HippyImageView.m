@@ -280,9 +280,9 @@ UIImage *HippyBlurredImageWithRadiusv(UIImage *inputImage, CGFloat radius)
         if (_isGray){
             NSDate *currentDate = [NSDate date];//获取当前时间，日期
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];// 创建一个时间格式化对象
-            [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss SS "];//设定时间格式,这里可以设置成自己需要的格式
+            [dateFormatter setDateFormat:@"YYYY/MM/ddhh:mm:ssSS"];//设定时间格式,这里可以设置成自己需要的格式
             NSString *dateString = [dateFormatter stringFromDate:currentDate];//将时间转化成字符串
-            uri = [uri stringByAppendingFormat:@"?gray=%@",dateString];
+            uri = [uri stringByAppendingFormat:@"&gray=%@",dateString];
         }
         BOOL isBlurredImage = NO;
         UIImage *image = [[HippyImageCacheManager sharedInstance] loadImageFromCacheForURLString:uri radius:_blurRadius isBlurredImage:&isBlurredImage];
