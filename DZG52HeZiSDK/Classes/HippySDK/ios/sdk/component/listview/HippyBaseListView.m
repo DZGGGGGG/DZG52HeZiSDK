@@ -127,10 +127,6 @@
 		[self addSubview:_tableView];
 	}
 }
-//- (void)touchBase{
-//    UIViewController *appRootVC = [[[UIApplication sharedApplication] delegate] window].rootViewController;
-//    [appRootVC.view endEditing:YES];
-//}
 - (void) setPreloadItemNumber:(NSUInteger)preloadItemNumber {
     _preloadItemNumber = MAX(1, preloadItemNumber);
 }

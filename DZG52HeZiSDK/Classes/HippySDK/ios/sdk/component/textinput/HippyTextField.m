@@ -491,9 +491,14 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         }
         _onKeyPress(@{@"key":resultKey});
     }
+    
     NSString *toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField.isSecureTextEntry) {
         textField.text = toBeString;
+
+        _onChangeText(@{
+                        @"text": textField.text,
+                        });
         return NO;
     }
     return YES;

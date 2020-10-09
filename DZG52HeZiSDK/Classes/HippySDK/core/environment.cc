@@ -49,6 +49,7 @@ Environment::~Environment() {
         if (engine) {
           napi_context_release(engine->GetVM(), context);
         }
+        
       };
 
   std::shared_ptr<Engine> engine = engine_.lock();

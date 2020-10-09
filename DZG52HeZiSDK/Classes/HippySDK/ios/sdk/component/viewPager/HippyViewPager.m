@@ -274,7 +274,7 @@
     [super setContentOffset:contentOffset];
 }
 
-- (void) setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
+- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
     _targetOffset = contentOffset;
     //[super setContentOffset:contentOffset animated:animated];
     if (self.viewPagerItems.count > 2){
@@ -292,6 +292,7 @@
             NSLog(@"有动画");
             [UIView animateWithDuration:0.15 animations:^
             {
+                
                 self.contentOffset = contentOffset;
                 //[super setContentOffset:contentOffset animated:NO];
                 //[self setContentOffset:contentOffset animated:NO];
