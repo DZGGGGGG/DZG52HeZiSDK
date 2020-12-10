@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DZG52HeZiSDK'
-  s.version          = '1.0.6'
+  s.version          = '1.0.7'
   s.summary          = '52hezei的DZG52HeZiSDK. 12.10版本'
 
 # This description is used to generate tags and improve search results.
@@ -43,5 +43,5 @@ TODO: Add long description of the pod here.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'MyToolsClass' , '~> 1.0.8'
 end
