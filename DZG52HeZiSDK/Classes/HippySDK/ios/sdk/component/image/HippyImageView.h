@@ -25,15 +25,20 @@
 #import "HippyConvert.h"
 #import "HippyAnimatedImageView.h"
 #import "HippyMemoryOpt.h"
+#import "HippyImageProviderProtocol.h"
+
 @class HippyBridge;
 @class HippyImageView;
+
 @interface HippyAnimatedImageOperation : NSOperation {
     NSData *_animatedImageData;
     NSString *_url;
     __weak HippyImageView *_imageView;
+    id<HippyImageProviderProtocol> _imageProvider;
 }
 
 - (id) initWithAnimatedImageData:(NSData *)data imageView:(HippyImageView *)imageView imageURL:(NSString *)url;
+- (id) initWithAnimatedImageProvider:(id<HippyImageProviderProtocol>)imageProvider imageView:(HippyImageView *)imageView imageURL:(NSString *)url;
 
 @end
 
@@ -51,16 +56,16 @@ typedef NS_ENUM(NSInteger, HippyResizeMode) {
 @property (nonatomic, assign) UIEdgeInsets capInsets;
 @property (nonatomic, assign) HippyResizeMode resizeMode;
 @property (nonatomic, copy) NSArray *source;
-@property (nonatomic) BOOL isGray;
 @property (nonatomic, strong) UIImage *defaultImage;
 @property (nonatomic, assign) UIImageRenderingMode renderingMode;
 @property (nonatomic, weak) HippyBridge *bridge;
-
+@property (nonatomic, assign) BOOL needDownsampleing;
 @property (nonatomic, assign) CGFloat borderTopLeftRadius;
 @property (nonatomic, assign) CGFloat borderTopRightRadius;
 @property (nonatomic, assign) CGFloat borderBottomLeftRadius;
 @property (nonatomic, assign) CGFloat borderBottomRightRadius;
 @property (nonatomic, assign) CGFloat borderRadius;
+@property (nonatomic) BOOL isGray;
 
 @property (nonatomic, copy) HippyDirectEventBlock onLoadStart;
 @property (nonatomic, copy) HippyDirectEventBlock onProgress;
@@ -75,6 +80,8 @@ typedef NS_ENUM(NSInteger, HippyResizeMode) {
 - (void)updateImage:(UIImage *)image;
 
 - (UIImage *) imageFromData:(NSData *)data;
+
+- (void)clearImageIfDetached;
 
 - (BOOL) needsUpdateCornerRadius;
 @end

@@ -119,7 +119,7 @@
 
 - (NSInteger)numberOfSection
 {
-    return _sections.count;
+	return _sections.count;
 }
 
 - (NSInteger)numberOfCellForSection:(NSInteger)section
@@ -148,13 +148,14 @@
 		
 		NSArray *cells = section[@"cell"];
 		for (__unused HippyVirtualCell *node in cells) {
-			if (totalIndex == index - 1) {
+			if (totalIndex == index) {
 				indexPath = [NSIndexPath indexPathForRow: rowIndex inSection: sectionIndex];
 				break;
 			}
 			rowIndex++;
 			totalIndex++;
 		}
+		
 		sectionIndex++;
 	}
 	

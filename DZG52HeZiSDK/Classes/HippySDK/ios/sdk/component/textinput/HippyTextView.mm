@@ -164,10 +164,9 @@
 
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
     _scrollView.scrollsToTop = NO;
-      _scrollView.userInteractionEnabled = YES;
-      //UIGestureRecognizer *toucha = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(TouchTextView)];
-      UITapGestureRecognizer *toucha = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TouchTextView)];
-      [_scrollView addGestureRecognizer:toucha];
+    _scrollView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *toucha = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(TouchTextView)];
+    [_scrollView addGestureRecognizer:toucha];
     [_scrollView addSubview:_textView];
 
       
@@ -180,9 +179,9 @@
   }
   return self;
 }
+
 - (void)TouchTextView{
     [_textView becomeFirstResponder];
-    NSLog(@"ddd");
 }
 HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithFrame:(CGRect)frame)
 HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)

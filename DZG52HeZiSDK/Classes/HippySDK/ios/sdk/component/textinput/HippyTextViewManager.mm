@@ -48,11 +48,10 @@ HIPPY_EXPORT_MODULE(TextInput)
                                                      selector:@selector(keyboardWillShow:)
                                                          name:UIKeyboardWillShowNotification
                                                        object:nil];
-            
-            [[NSNotificationCenter defaultCenter] addObserver:textField
-                                                     selector:@selector(keyboardWillHide:)
-                                                         name:UIKeyboardWillHideNotification
-                                                       object:nil];
+           [[NSNotificationCenter defaultCenter] addObserver:textField
+                                                    selector:@selector(keyboardWillHide:)
+                                                        name:UIKeyboardWillHideNotification
+                                                      object:nil];
         }
         theView = textField;
     } else {
@@ -62,11 +61,11 @@ HIPPY_EXPORT_MODULE(TextInput)
                                                      selector:@selector(keyboardWillShow:)
                                                          name:UIKeyboardWillShowNotification
                                                        object:nil];
-            
-            [[NSNotificationCenter defaultCenter] addObserver:textView
-                                                     selector:@selector(keyboardWillHide:)
-                                                         name:UIKeyboardWillHideNotification
-                                                       object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:textView
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
         }
         theView = textView;
     }

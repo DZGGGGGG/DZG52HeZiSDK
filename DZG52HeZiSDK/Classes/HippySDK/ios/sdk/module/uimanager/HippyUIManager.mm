@@ -95,6 +95,7 @@ NSString *const HippyUIManagerRootViewKey = @"HippyUIManagerRootViewKey";
 @synthesize bridge = _bridge;
 
 HIPPY_EXPORT_MODULE()
+
 - (instancetype) init {
     self = [super init];
     if (self) {
@@ -1202,16 +1203,18 @@ HIPPY_EXPORT_METHOD(dispatchViewManagerCommand:(nonnull NSNumber *)hippyTag
     if (previousPendingUIBlocks.count) {
         // Execute the previously queued UI blocks
         dispatch_async(dispatch_get_main_queue(), ^{
-            HippyUIManager *uiManager = weakManager;
-            @try {
-                for (HippyViewManagerUIBlock block in previousPendingUIBlocks) {
-                    block(uiManager, uiManager->_viewRegistry);
+            if (weakManager) {
+                HippyUIManager *uiManager = weakManager;
+                @try {
+                    for (HippyViewManagerUIBlock block in previousPendingUIBlocks) {
+                        block(uiManager, uiManager->_viewRegistry);
+                    }
+                    
+                    [uiManager flushListView];
                 }
-                
-                [uiManager flushListView];
-            }
-            @catch (NSException *exception) {
-                HippyLogError(@"Exception thrown while executing UI block: %@", exception);
+                @catch (NSException *exception) {
+                    HippyLogError(@"Exception thrown while executing UI block: %@", exception);
+                }
             }
         });
     }
@@ -1316,6 +1319,32 @@ HIPPY_EXPORT_METHOD(measure:(nonnull NSNumber *)hippyTag
 
 HIPPY_EXPORT_METHOD(measureInWindow:(nonnull NSNumber *)hippyTag
                   callback:(HippyResponseSenderBlock)callback)
+{
+    [self addUIBlock:^(__unused HippyUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
+        UIView *view = viewRegistry[hippyTag];
+        if (!view) {
+            // this view was probably collapsed out
+            HippyLogWarn(@"measure cannot find view with tag #%@", hippyTag);
+            callback(@[]);
+            return;
+        }
+        UIView *rootView = viewRegistry[view.rootTag];
+        if (!rootView) {
+            HippyLogWarn(@"measure cannot find view's root view with tag #%@", hippyTag);
+            callback(@[]);
+            return;
+        }
+        
+        CGRect windowFrame = [rootView convertRect:view.frame fromView:view.superview];
+        callback(@[@{@"width":@(CGRectGetWidth(windowFrame)),
+                     @"height": @(CGRectGetHeight(windowFrame)),
+                     @"x":@(windowFrame.origin.x),
+                     @"y":@(windowFrame.origin.y)}]);
+    }];
+}
+
+HIPPY_EXPORT_METHOD(measureInAppWindow:(nonnull NSNumber *)hippyTag
+                callback:(HippyResponseSenderBlock)callback)
 {
     [self addUIBlock:^(__unused HippyUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry) {
         UIView *view = viewRegistry[hippyTag];

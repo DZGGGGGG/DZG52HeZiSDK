@@ -59,6 +59,7 @@
     }
     return self;
 }
+
 #pragma mark hippy native methods
 
 - (void)insertHippySubview:(UIView *)view atIndex:(NSInteger)atIndex
@@ -120,6 +121,7 @@
                                         });
     }
 }
+
 #pragma mark scrollview delegate methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.onPageScrollStateChanged) {
@@ -196,7 +198,7 @@
         self.onPageSelected(@{
                               @"position": @(thePage)
                               });
-                _lastPageIndex = thePage;
+        _lastPageIndex = thePage;
     }
     for (NSObject<UIScrollViewDelegate> *scrollViewListener in _scrollViewListener) {
         if ([scrollViewListener respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)]) {
@@ -274,9 +276,10 @@
     [super setContentOffset:contentOffset];
 }
 
-- (void)setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
+- (void) setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated {
     _targetOffset = contentOffset;
-    //[super setContentOffset:contentOffset animated:animated];
+//    [super setContentOffset:contentOffset animated:animated];
+    
     if (self.viewPagerItems.count > 2){
         if (animated){
             [UIView animateWithDuration:0.15 animations:^
@@ -290,6 +293,7 @@
     }else{
         if (animated){
             NSLog(@"有动画");
+            //[super setContentOffset:contentOffset animated:animated];
             [UIView animateWithDuration:0.15 animations:^
             {
                 
@@ -302,7 +306,6 @@
             self.contentOffset = contentOffset;
         }
     }
-
 }
 
 - (CGFloat)commonPagerWidth {
@@ -378,6 +381,7 @@
         }
     }
 }
+
 - (NSUInteger)nowPage {
     CGFloat nowX = self.contentOffset.x;
     NSInteger thePage = -1;

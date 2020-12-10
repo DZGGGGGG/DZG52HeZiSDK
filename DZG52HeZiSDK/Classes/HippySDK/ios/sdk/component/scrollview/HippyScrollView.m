@@ -344,6 +344,7 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         _lastClippedToRect = bounds;
     }
 }
+
 - (void)setContentInset:(UIEdgeInsets)contentInset
 {
     if (UIEdgeInsetsEqualToEdgeInsets(contentInset, _contentInset)) {
@@ -771,7 +772,6 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         // adjusting contentOffset whenever this happens
         CGPoint newOffset = [self calculateOffsetForContentSize:contentSize];
         _scrollView.contentSize = contentSize;
-        
         _scrollView.contentOffset = newOffset;
     }
 }

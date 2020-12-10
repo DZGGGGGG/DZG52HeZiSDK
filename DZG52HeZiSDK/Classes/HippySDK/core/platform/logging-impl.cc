@@ -28,6 +28,7 @@
 #include <android/log.h>
 #else
 #include <stdio.h>
+
 #include <iostream>
 #endif  // OS_ANDROID
 
@@ -48,8 +49,8 @@ namespace platform {
     va_list va;                                           \
     va_start(va, format);                                 \
     std::cout << "[HippyCore][" #LogLevel "]"             \
-              << ": " << std::endl;                                    \
-    vprintf(format, va);\
+              << ": ";                                    \
+    vprintf(format, va);                                  \
     std::cout << std::endl;                               \
     va_end(va);                                           \
   }

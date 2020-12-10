@@ -143,6 +143,7 @@
                             );
     }
 }
+
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {
     [super keyboardWillHide:aNotification];
@@ -166,6 +167,7 @@
     _textView.backgroundColor = [UIColor clearColor];
     _textView.textColor = [UIColor blackColor];
     _textView.delegate = self;
+    _placeholderTextColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     [_textView addObserver:self forKeyPath:@"selectedTextRange" options:0 context:nil];
     [_textView addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
     [_textView addTarget:self action:@selector(textFieldBeginEditing) forControlEvents:UIControlEventEditingDidBegin];
@@ -491,11 +493,9 @@ HIPPY_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
         }
         _onKeyPress(@{@"key":resultKey});
     }
-    
     NSString *toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField.isSecureTextEntry) {
         textField.text = toBeString;
-
         _onChangeText(@{
                         @"text": textField.text,
                         });

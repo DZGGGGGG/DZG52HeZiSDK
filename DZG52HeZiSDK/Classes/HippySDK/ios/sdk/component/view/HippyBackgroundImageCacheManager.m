@@ -183,6 +183,16 @@
     UIImage* destinationImage = cropImageAndStore(originImage);
     completionHandler(destinationImage, destinationImage ? nil : self.defaultError);
     return;
+  } else {
+      originImage = [UIImage imageWithContentsOfFile:uri];
+      if(!originImage){
+          completionHandler(nil, self.defaultError);
+          return;
+      }
+      [self saveOriginImageToCache:originImage uri:uri];
+      UIImage* destinationImage = cropImageAndStore(originImage);
+      completionHandler(destinationImage, destinationImage ? nil : self.defaultError);
+      return;
   }
   //未知类型
   completionHandler(nil, self.defaultError);

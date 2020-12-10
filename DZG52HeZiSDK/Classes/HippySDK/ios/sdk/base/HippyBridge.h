@@ -29,6 +29,7 @@
 #import "HippyInvalidating.h"
 #import "HippyImageViewCustomLoader.h"
 #import "HippyCustomTouchHandlerProtocol.h"
+#import "HippyImageProviderProtocol.h"
 
 @class JSValue;
 @class HippyBridge;
@@ -94,7 +95,8 @@ HIPPY_EXTERN NSString *HippyBridgeModuleNameForClass(Class bridgeModuleClass);
 - (instancetype)initWithDelegate:(id<HippyBridgeDelegate>)delegate
                        bundleURL:(NSURL *)bundleURL
                   moduleProvider:(HippyBridgeModuleProviderBlock)block
-                   launchOptions:(NSDictionary *)launchOptions;
+                   launchOptions:(NSDictionary *)launchOptions
+                     executorKey:(NSString *)executorKey;
 /**
  * Creates a new bridge with a custom HippyBridgeDelegate.
  *
@@ -107,19 +109,10 @@ HIPPY_EXTERN NSString *HippyBridgeModuleNameForClass(Class bridgeModuleClass);
 - (instancetype)initWithDelegate:(id<HippyBridgeDelegate>)delegate
                    launchOptions:(NSDictionary *)launchOptions;
 
-/**
- * DEPRECATED: Use initWithDelegate:launchOptions: instead
- *
- * The designated initializer. This creates a new bridge on top of the specified
- * executor. The bridge should then be used for all subsequent communication
- * with the JavaScript code running in the executor. Modules will be automatically
- * instantiated using the default contructor, but you can optionally pass in an
- * array of pre-initialized module instances if they require additional init
- * parameters or configuration.
- */
 - (instancetype)initWithBundleURL:(NSURL *)bundleURL
                    moduleProvider:(HippyBridgeModuleProviderBlock)block
-                    launchOptions:(NSDictionary *)launchOptions;
+                    launchOptions:(NSDictionary *)launchOptions
+                      executorKey:(NSString *)executorKey;
 
 /**
  * This method is used to call functions in the JavaScript application context.
@@ -204,6 +197,7 @@ HIPPY_EXTERN NSString *HippyBridgeModuleNameForClass(Class bridgeModuleClass);
 
 @property (nonatomic, strong, readonly) id <HippyImageViewCustomLoader> imageLoader;
 @property (nonatomic, strong, readonly) id <HippyCustomTouchHandlerProtocol> customTouchHandler;
+@property (nonatomic, strong, readonly) NSSet<Class<HippyImageProviderProtocol>> *imageProviders;
 
 /**
  * The launch options that were used to initialize the bridge.

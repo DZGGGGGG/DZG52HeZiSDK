@@ -27,9 +27,11 @@
 #include "callback-info.h"
 #include "js-native-api-types.h"
 
+class Scope;
+
 class ConsoleModule : public ModuleBase {
  public:
-  explicit ConsoleModule(hippy::napi::napi_context context) {}
+  explicit ConsoleModule() {}
   void Log(const hippy::napi::CallbackInfo& info);
 };
 

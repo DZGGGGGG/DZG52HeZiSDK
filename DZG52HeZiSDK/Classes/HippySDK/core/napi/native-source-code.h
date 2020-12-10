@@ -25,13 +25,14 @@
 
 #include <stddef.h>
 #include <stdint.h>
+
 #include <string>
 
 namespace hippy {
 
 struct NativeSourceCode {
-  const uint8_t* data;
-  size_t length;  // strlen(data)
+  const uint8_t* data_;
+  size_t length_;  // strlen(data_)
 };
 
 const NativeSourceCode GetNativeSourceCode(const std::string& filename);

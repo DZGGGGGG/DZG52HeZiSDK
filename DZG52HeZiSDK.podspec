@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DZG52HeZiSDK'
-  s.version          = '1.0.5'
-  s.summary          = '52hezei的DZG52HeZiSDK. 11.20版本'
+  s.version          = '1.0.6'
+  s.summary          = '52hezei的DZG52HeZiSDK. 12.10版本'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
