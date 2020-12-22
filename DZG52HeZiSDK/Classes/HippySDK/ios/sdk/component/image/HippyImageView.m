@@ -272,7 +272,23 @@ UIImage *HippyBlurredImageWithRadiusv(UIImage *inputImage, CGFloat radius)
 		[self updateImage: self.image];
 	}
 }
-
+- (void)save:(UIImage *)image{
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+-(void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+        if (_onSaveResult) {
+            _onSaveResult(@{@"code":[NSNumber numberWithInt:0],@"msg":msg});
+        }
+    }else{
+        msg = @"保存图片成功" ;
+        if (_onSaveResult) {
+            _onSaveResult(@{@"code":[NSNumber numberWithInt:1],@"msg":msg});
+        }
+    }
+}
 - (BOOL)shouldChangeImageSource
 {
 // We need to reload if the desired image source is different from the current image

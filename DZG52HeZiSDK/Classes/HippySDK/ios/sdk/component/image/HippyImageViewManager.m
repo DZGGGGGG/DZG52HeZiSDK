@@ -24,6 +24,7 @@
 #import "HippyImageView.h"
 #import "HippyConvert.h"
 #import <UIKit/UIKit.h>
+#import "HippyUIManager.h"
 
 @implementation HippyImageViewManager
 
@@ -34,6 +35,7 @@ HIPPY_EXPORT_VIEW_PROPERTY(capInsets, UIEdgeInsets)
 HIPPY_EXPORT_VIEW_PROPERTY(resizeMode, HippyResizeMode)
 HIPPY_EXPORT_VIEW_PROPERTY(source, NSArray)
 HIPPY_EXPORT_VIEW_PROPERTY(isGray, BOOL)
+HIPPY_EXPORT_VIEW_PROPERTY(onSaveResult, HippyDirectEventBlock)
 HIPPY_EXPORT_VIEW_PROPERTY(onLoadStart, HippyDirectEventBlock)
 HIPPY_EXPORT_VIEW_PROPERTY(onProgress, HippyDirectEventBlock)
 HIPPY_EXPORT_VIEW_PROPERTY(onError, HippyDirectEventBlock)
@@ -47,7 +49,17 @@ HIPPY_CUSTOM_VIEW_PROPERTY(tintColor, UIColor, HippyImageView)
 	view.tintColor = [HippyConvert UIColor:json] ?: defaultView.tintColor;
 	view.renderingMode = json ? UIImageRenderingModeAlwaysTemplate : defaultView.renderingMode;
 }
-
+HIPPY_EXPORT_METHOD(save:(nonnull NSNumber *)hippyTag) {
+    [self.bridge.uiManager addUIBlock:^(__unused HippyUIManager *uiManager, NSDictionary<NSNumber *, UIView *> *viewRegistry){
+        UIView *view = viewRegistry[hippyTag];
+        if (view == nil || ![view isKindOfClass:[HippyImageView class]]) {
+            HippyLogError(@"tried to setPage: on an error viewPager %@ "
+                        "with tag #%@", view, hippyTag);
+        }
+        HippyImageView *imageView = (HippyImageView *)view;
+        [imageView save:imageView.image];
+    }];
+}
 HIPPY_CUSTOM_VIEW_PROPERTY(defaultSource, NSString, HippyImageView) {
     NSString *source = [HippyConvert NSString:json];
     if ([source hasPrefix: @"data:image/"]) {

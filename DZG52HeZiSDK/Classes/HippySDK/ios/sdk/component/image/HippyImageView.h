@@ -67,6 +67,7 @@ typedef NS_ENUM(NSInteger, HippyResizeMode) {
 @property (nonatomic, assign) CGFloat borderRadius;
 @property (nonatomic) BOOL isGray;
 
+@property (nonatomic, copy) HippyDirectEventBlock onSaveResult;
 @property (nonatomic, copy) HippyDirectEventBlock onLoadStart;
 @property (nonatomic, copy) HippyDirectEventBlock onProgress;
 @property (nonatomic, copy) HippyDirectEventBlock onError;
@@ -84,6 +85,8 @@ typedef NS_ENUM(NSInteger, HippyResizeMode) {
 - (void)clearImageIfDetached;
 
 - (BOOL) needsUpdateCornerRadius;
+
+- (void) save:(UIImage *)image;
 @end
 
 @interface HippyConvert(HippyResizeMode)

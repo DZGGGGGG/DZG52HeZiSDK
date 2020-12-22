@@ -69,9 +69,11 @@ void ConsoleModule::Log(const hippy::napi::CallbackInfo& info) {
   const char* log_msg = str.c_str();
   if (info.Length() == 1) {
     HIPPY_LOG(hippy::Debug, log_msg);
-      
+
+      #ifdef DEBUG
     NSString *message = [[NSString alloc] initWithUTF8String:log_msg];
     [[deBugSendMessage instance] webSocketSendData:message];
+    #endif
   } else {
     std::string type;
     if (!context->GetValueString(info[1], &type) || type.empty()) {
